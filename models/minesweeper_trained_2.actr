@@ -1,0 +1,568 @@
+(set-task "actr.tasks.minesweeper.Minesweeper")
+
+(sgp 
+    :v nil :visual-num-finsts 63 :visual-finst-span 1000
+)
+
+(start-hand-at-mouse)
+
+(add-dm
+    (start-goal isa goal state start first-move t)
+    (history~99302 isa history i f a x d x action f result win b 1 g x h 2 c 1 f 2)
+    (history~9730 isa history i 1 a 1 d 2 action f result win b 1 g f h 2 c 1 f 1)
+    (history~95961 isa history i 1 a 1 d 1 action f result win b 2 g 1 h 1 c f f 2)
+    (history~947685 isa history i x a 2 d 2 action c result loss b u g x h x c x f x)
+    (history~936447 isa history i x a 1 d 1 action f result win b 2 g x h x c f f 2)
+    (history~9281 isa history i x a u d u action c result loss b u g u h u c x f x)
+    (history~92206 isa history i x a 1 d 2 action c result loss b 1 g u h u c x f x)
+    (history~92170 isa history i 2 a x d 1 action f result win b x g 1 h 2 c x f 1)
+    (history~91546 isa history i 2 a x d 1 action f result win b x g 2 h 2 c x f 1)
+    (history~868888 isa history i x a x d x action c result loss b 2 g x h x c u f 2)
+    (history~85835 isa history i 2 a x d 1 action f result win b x g 1 h 1 c x f 1)
+    (history~846612 isa history i x a 2 d u action c result loss b 2 g 2 h 2 c x f x)
+    (history~84158 isa history i x a 1 d 1 action f result win b 1 g x h x c 2 f 2)
+    (history~81731 isa history i x a 2 d 1 action f result win b 2 g 1 h 1 c x f x)
+    (history~81486 isa history i 1 a 2 d 1 action f result win b 1 g 1 h 1 c 1 f 1)
+    (history~788656 isa history i 2 a x d x action f result win b 1 g x h f c 1 f 2)
+    (history~78147 isa history i 1 a f d 2 action f result win b 2 g 1 h 1 c 1 f 1)
+    (history~77251 isa history i 1 a 2 d 1 action f result win b 2 g 1 h 1 c 1 f 1)
+    (history~7537 isa history i 1 a 1 d 1 action c result loss b 2 g 1 h 1 c u f 2)
+    (history~7489 isa history i 1 a x d 1 action f result win b x g 1 h 1 c x f 1)
+    (history~7349143 isa history i x a x d u action c result loss h 2 g 2 c x b x f x)
+    (history~73354 isa history i 1 a 1 d 2 action c result loss b 1 g u h 2 c 1 f 1)
+    (history~73174 isa history i 2 a 1 d 1 action f result win b 2 g 1 h 2 c 2 f f)
+    (history~703858 isa history i x a f d u action f result win b 2 g x h x c 1 f 1)
+    (history~69599 isa history i 2 a 1 d 1 action f result win b 1 g 1 h 1 c 2 f 2)
+    (history~69323 isa history i 1 a 2 d 1 action f result win b 2 g 1 h 1 c 2 f 1)
+    (history~673102 isa history i x a 1 d 2 action c result loss b 1 g u h 2 c x f x)
+    (history~66548 isa history i f a 1 d 1 action f result win b 1 g 1 h 2 c 1 f 2)
+    (history~661748 isa history i x a 2 d 1 action f result win b 2 g x h x c x f x)
+    (history~65052 isa history i 1 a 2 d 2 action f result win b 1 g 2 h 1 c 1 f 1)
+    (history~636288 isa history i x a 2 d 2 action f result win b 1 g 1 h 1 c x f x)
+    (history~63618 isa history i x a x d 1 action f result win b x g 2 h 2 c x f x)
+    (history~627535 isa history i 1 a x d f action f result win b x g 2 h 2 c x f 1)
+    (history~610480 isa history i x a 2 d f action f result win b 2 g x h x c 1 f 1)
+    (history~605663 isa history i 1 a x d x action c result loss b 2 g x h 1 c u f 2)
+    (history~59877 isa history i 1 a x d 2 action f result win b x g 2 h 1 c x f 1)
+    (history~597845 isa history i f a x d 1 action f result win b x g 1 h 2 c x f 2)
+    (history~595332 isa history i u a x d x action c result loss b 1 g x h u c 1 f 2)
+    (history~58902 isa history i 1 a 2 d 2 action f result win b 1 g 1 h 1 c 1 f 1)
+    (history~56248 isa history i x a x d x action f result win b 1 g x h x c 1 f 1)
+    (history~560074 isa history i 2 a x d x action f result win h 2 g x c x b x f f)
+    (history~551749 isa history i x a 1 d 1 action c result loss b 2 g x h x c 2 f u)
+    (history~549097 isa history i 2 a x d x action c result loss b x g x h u c x f 2)
+    (history~54766 isa history i 2 a 1 d 1 action f result win b 1 g 1 h 1 c 1 f 2)
+    (history~546808 isa history i 1 a x d x action f result win b 2 g x h 1 c f f 2)
+    (history~5462 isa history i x a 1 d 1 action f result win b 1 g 1 h 1 c x f x)
+    (history~530600 isa history i x a x d 1 action f result win b x g 2 h 1 c x f x)
+    (history~52894 isa history i x a 1 d 1 action f result win b 2 g x h x c 2 f 1)
+    (history~508100 isa history i f a x d x action f result win b x g x h 2 c x f 2)
+    (history~495097 isa history i 2 a x d x action f result win b 1 g x h 1 c 1 f 2)
+    (history~49319 isa history i 1 a 2 d 2 action c result loss b u g 1 h 1 c 2 f 2)
+    (history~486769 isa history i x a 1 d 2 action f result win b 1 g f h 2 c x f x)
+    (history~486284 isa history i x a x d 2 action c result loss b x g 2 h u c x f x)
+    (history~483872 isa history i 1 a x d 2 action f result win b x g f h 2 c x f 1)
+    (history~4760330 isa history i f a x d 1 action c result loss h 2 g 1 c x b x f u)
+    (history~4677 isa history i 1 a 1 d 2 action f result win b 1 g 2 h 1 c 1 f 1)
+    (history~46499 isa history i 1 a 1 d 1 action f result win b 1 g 1 h 1 c 2 f 1)
+    (history~462941 isa history i 1 a x d x action c result loss b u g x h 1 c 2 f 2)
+    (history~46223 isa history i 1 a x d x action f result win b x g x h 1 c x f 1)
+    (history~458 isa history i 1 a 1 d 1 action f result win b 1 g 1 h 1 c 1 f 1)
+    (history~456507 isa history i 2 a x d x action f result win b x g x h 1 c x f 2)
+    (history~45485 isa history i 1 a u d 2 action c result loss b 2 g 1 h 1 c 1 f 1)
+    (history~453713 isa history i x a 2 d 2 action f result win b f g 1 h 1 c x f x)
+    (history~45305 isa history i 2 a x d x action f result win b 2 g x h 2 c 2 f f)
+    (history~453045 isa history i x a 1 d 1 action f result win b 1 g x h x c 2 f 1)
+    (history~441430 isa history i 2 a x d 2 action f result win b x g 2 h f c x f 2)
+    (history~43650 isa history i 2 a 1 d 1 action f result win b 1 g 2 h 2 c 1 f 1)
+    (history~430100 isa history i x a x d 2 action f result win b x g 2 h 1 c x f x)
+    (history~42648 isa history i 1 a x d u action c result loss b x g 2 h 2 c x f 1)
+    (history~41805 isa history i 1 a 2 d u action c result loss b 2 g 2 h 2 c 1 f 1)
+    (history~41709 isa history i x a 1 d 1 action f result win b 1 g x h x c x f x)
+    (history~415505 isa history i 1 a x d x action f result win b f g x h 1 c 2 f 2)
+    (history~41092 isa history i u a x d x action c result loss b 1 g x h 2 c 1 f 2)
+    (history~404220 isa history i u a x d 1 action c result loss b x g 1 h 2 c x f u)
+    (history~392669 isa history i x a u d u action c result loss b u g x h x c u f u)
+    (history~3923685 isa history i f a x d x action f result win b 1 g x h u c 1 f 2)
+    (history~390514 isa history i x a 2 d 2 action c result loss b u g x h x c 2 f 2)
+    (history~385385 isa history i 2 a x d x action c result loss b 1 g x h u c 1 f 2)
+    (history~382478 isa history i 2 a x d 2 action c result loss b x g 2 h u c x f 2)
+    (history~380393 isa history i 2 a x d 1 action c result loss b x g 1 h 2 c x f u)
+    (history~37414 isa history i x a x d u action c result loss b x g u h u c x f x)
+    (history~368805 isa history i x a u d 2 action c result loss b 2 g x h x c 1 f 1)
+    (history~365068 isa history i u a x d 1 action c result loss b x g 1 h 2 c x f 2)
+    (history~364357 isa history i x a 2 d 2 action f result win b 1 g x h x c x f x)
+    (history~3569418 isa history i x a u d u action c result loss b 2 g x h x c 1 f 1)
+    (history~35629 isa history i 1 a x d x action f result win b 1 g x h 1 c 2 f 2)
+    (history~347373 isa history i 2 a x d x action f result win b x g x h 1 c x f 1)
+    (history~3373 isa history i x a x d 1 action f result win b x g 1 h 1 c x f x)
+    (history~3280820 isa history i 2 a x d x action f result win b x g x h f c x f 2)
+    (history~316089 isa history i x a 2 d 1 action f result win b 1 g 1 h 1 c x f x)
+    (history~31415 isa history i x a 1 d 1 action f result win b 1 g 2 h 2 c x f x)
+    (history~30404 isa history i 2 a 1 d 1 action f result win b 1 g 1 h 1 c 1 f 1)
+    (history~30248 isa history i u a u d u action f result loss b u g u h u c u f u)
+    (history~30229 isa history i x a 1 d 2 action f result win b 1 g 2 h 1 c x f x)
+    (history~300987 isa history i 1 a 2 d f action f result win b 2 g 2 h 2 c 1 f 1)
+    (history~298429 isa history i 1 a x d x action f result win b 2 g x h 1 c 2 f 1)
+    (history~278 isa history i x a 1 d 1 action f result win b 1 g x h x c 1 f 1)
+    (history~277612 isa history i x a f d 2 action f result win b 2 g 1 h 1 c x f x)
+    (history~252488 isa history i 1 a x d 1 action f result win b x g 2 h 2 c x f 1)
+    (history~251751 isa history i x a 1 d 2 action f result win b 1 g 2 h f c x f x)
+    (history~2477257 isa history i x a x d x action f result win b f g x h x c 2 f 2)
+    (history~2433325 isa history i x a x d 2 action c result loss h 2 g u c x b x f x)
+    (history~242704 isa history i x a 2 d 2 action f result win b f g x h x c 2 f 2)
+    (history~24127 isa history i x a 2 d 2 action c result loss b u g 1 h 1 c x f x)
+    (history~2411026 isa history i 2 a x d x action c result loss b x g x h 2 c x f u)
+    (history~239975 isa history i x a f d 2 action f result win b 2 g x h x c 1 f 1)
+    (history~237825 isa history i 1 a x d x action f result win b 1 g x h 1 c 2 f 1)
+    (history~228498 isa history i 2 a x d x action f result win b 1 g x h 2 c 1 f 1)
+    (history~227412 isa history i u a x d x action c result loss b u g x h u c u f u)
+    (history~22681 isa history i 1 a 1 d 1 action f result win b 1 g 2 h 2 c 1 f 1)
+    (history~2186110 isa history i x a x d x action f result win b 2 g x h x c 2 f f)
+    (history~218336 isa history i x a f d 2 action f result win h 1 g 1 c x b u f x)
+    (history~206206 isa history i 1 a 2 d 2 action f result win b f g 1 h 1 c 2 f 2)
+    (history~204440 isa history i 1 a x d 1 action f result win b x g 2 h 1 c x f 1)
+    (history~2030005 isa history i x a x d f action f result win b x g 2 h 2 c x f x)
+    (history~202427 isa history i 2 a 1 d 2 action f result win b 1 g 2 h f c 1 f 2)
+    (history~20159 isa history i u a 1 d 1 action c result loss b 1 g 1 h 2 c 1 f 2)
+    (history~194455 isa history i x a 2 d 2 action f result win b 1 g x h x c 1 f 1)
+    (history~190972 isa history i x a 2 d 1 action f result win b 2 g x h x c 2 f 1)
+    (history~188536 isa history i x a 2 d f action f result win b 2 g 2 h 2 c x f x)
+    (history~184664 isa history i 2 a x d 1 action f result win b x g 1 h 2 c x f f)
+    (history~1816664 isa history i x a x d x action f result win b 1 g x h x c 2 f 2)
+    (history~181608 isa history i x a 1 d 1 action f result win b 1 g 2 h 1 c x f x)
+    (history~1810860 isa history i 1 a x d x action f result win h 1 g x c f b u f 2)
+    (history~1778585 isa history i x a f d 2 action f result win b 2 g x h x c x f x)
+    (history~1769097 isa history i x a x d x action f result win b 2 g x h x c f f 2)
+    (history~17480 isa history i 2 a 1 d 1 action f result win b 1 g 1 h 2 c 1 f 1)
+    (history~174456 isa history i u a x d x action c result loss b x g x h u c x f u)
+    (history~172337 isa history i 2 a x d 1 action f result win b x g 1 h 1 c x f 2)
+    (history~1720735 isa history i 1 a x d u action c result loss b x g u h 2 c x f 1)
+    (history~1705526 isa history i x a u d 2 action c result loss b 2 g x h x c x f x)
+    (history~169987 isa history i 2 a 1 d 2 action c result loss b 1 g 2 h u c 1 f 2)
+    (history~1694 isa history i 1 a x d x action f result win b 1 g x h 1 c 1 f 1)
+    (history~1646 isa history i 1 a 1 d 1 action f result win b 1 g 2 h 1 c 1 f 1)
+    (history~1630537 isa history i x a 1 d 1 action f result win b 2 g x h x c 2 f f)
+    (history~154798 isa history i x a 1 d 2 action c result loss b 1 g 2 h u c x f x)
+    (history~152701 isa history i 2 a x d x action f result win b 1 g x h 1 c 2 f 2)
+    (history~1506102 isa history i x a 1 d 2 action c result loss b 1 g f h u c x f x)
+    (history~1502683 isa history i x a 2 d 2 action f result win b f g x h x c x f x)
+    (history~14999 isa history i u a x d u action c result loss b x g u h u c x f u)
+    (history~1476618 isa history i x a x d 2 action f result win b x g 2 h f c x f x)
+    (history~1464037 isa history i x a 2 d f action f result win b 2 g x h x c x f x)
+    (history~140599 isa history i x a x d 2 action f result win b x g f h 2 c x f x)
+    (history~1372009 isa history i x a 2 d u action c result loss b 2 g x h x c 1 f 1)
+    (history~136347 isa history i x a 2 d 2 action f result win b 1 g 2 h 1 c x f x)
+    (history~136167 isa history i x a x d x action c result loss b u g x h x c 2 f 2)
+    (history~1326814 isa history i x a x d x action f result win b 1 g x h x c 2 f 1)
+    (history~1237839 isa history i x a x d x action f result win b 2 g x h x c 2 f 1)
+    (history~123400 isa history i x a 1 d 1 action c result loss b 2 g x h x c u f 2)
+    (history~1220932 isa history i 2 a x d x action c result loss b 2 g x h 2 c 2 f u)
+    (history~1219906 isa history i x a u d u action c result loss b u g x h x c x f x)
+    (history~1202 isa history i 1 a 1 d 1 action f result win b 1 g 1 h 1 c 2 f 2)
+    (history~1185587 isa history i x a x d x action c result loss b 2 g x h x c 2 f u)
+    (history~1151229 isa history i 1 a x d 2 action c result loss b x g u h 2 c x f 1)
+    (history~113723 isa history i 2 a x d x action f result win b 1 g x h 1 c 1 f 1)
+    (history~1136624 isa history i x a x d x action c result loss b u g x h x c u f u)
+    (history~1134385 isa history i 1 a x d x action c result loss b u g x h 1 c u f 2)
+    (history~113322 isa history i x a 2 d 1 action f result win b 1 g x h x c 1 f 1)
+    (history~1130 isa history i 1 a 1 d 1 action f result win b 2 g 1 h 1 c 2 f 1)
+    (history~106257 isa history i 2 a 1 d 1 action c result loss b 2 g 1 h 2 c 2 f u)
+    (history~105813 isa history i 2 a x d x action f result win b x g x h 2 c x f 1)
+    (history~1050243 isa history i x a u d 2 action c result loss h 1 g 1 c x b u f x)
+    (history~1040743 isa history i u a x d x action c result loss b x g x h 2 c x f 2)
+    (history~1028312 isa history i x a 2 d u action c result loss b 2 g x h x c x f x)
+    (history~1027988 isa history i x a 1 d 1 action c result loss b 2 g x h x c u f u)
+    (history~101870 isa history i x a u d 2 action c result loss b 2 g 1 h 1 c x f x)
+    (history~100568 isa history i x a 2 d 1 action f result win b 2 g x h x c 1 f 1)
+    (history~1000945 isa history i x a 2 d 1 action f result win b 1 g x h x c x f x)
+)
+
+; entry point
+(p start-game
+    =goal>
+        isa		goal
+        state		start
+==>
+    =goal>
+        state		find-new
+)
+
+(p find-start-location
+    =goal>
+        isa 		goal
+        state 		find-new
+    ?visual>
+        state 		free
+==>
+    +visual-location>
+        isa		oval
+        :attended 	nil
+    =goal>
+        state 		finding-location
+)
+
+(p location-found
+    =goal>
+        isa 		goal
+        state		finding-location
+    =visual-location>
+        isa		visual-location
+    ?visual>
+        state		free
+    ?manual>
+        state		free
+==>
+    =visual-location>
+    +visual>
+        isa		move-attention
+        screen-pos	=visual-location
+    +manual>
+        isa		move-cursor
+        loc		=visual-location
+    =goal>
+        state		move-mouse
+)
+
+(p move-mouse-to-position
+    =goal>
+        isa		goal
+        state		move-mouse
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		s
+    =goal>
+        state		wait-for-scan
+)
+
+(p waiting-for-scan
+    =goal>
+        isa		goal
+        state		wait-for-scan
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		location-scanned
+)
+
+; if first move, always clear
+(p default-clear
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	t
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c
+    =goal>
+        state		wait-for-action
+        first-move	f
+        action		c
+)
+
+; not first move, not unknown
+(p uninterested
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	f
+        - e		u
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		find-new
+)
+
+; not first move, unknown, attempt to retrieve history
+(p retrieve-history
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	f
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        e		u
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state		free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		attempt-history
+)
+
+; couldn't find this configuration, clear it and hope for the best
+(p retrieve-history-failed
+    =goal>
+        isa		goal
+        state		attempt-history
+    ?retrieval>
+        state		error
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c
+    =goal>
+        state		wait-for-action
+        action		c
+)
+
+; found configuration, was ok last time we did the same move...
+(p retrieve-history-success-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		=action
+        - result	loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		=action
+    =goal>
+        state		wait-for-action
+        action		=action
+)
+
+; found configuration, was NOT ok last time we did the same move...
+(p retrieve-history-success-clear-not-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		c
+        result		loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		f ;flag
+    =goal>
+        state		wait-for-action
+        action		f
+)
+
+(p retrieve-history-success-flag-not-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		f
+        result		loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c ;clear
+    =goal>
+        state		wait-for-action
+        action		c
+)
+
+; this will only ever fire on non-game-ending moves
+(p waiting-for-action
+    =goal>
+        isa		goal
+        state		wait-for-action
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		find-new
+)
+
+; gameover conditions
+(p gameover-loss
+    =goal>
+        isa		goal
+        state		gameover-loss
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state	free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		review-retrieve-loss
+)
+
+(p gameover-history-loss-retrieved
+    =goal>
+        isa		goal
+        state		review-retrieve-loss
+        action		=action
+    =retrieval>
+        isa		history
+==>
+    =retrieval>
+        action		=action
+        result		loss
+    -retrieval>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-history-loss-no-retrieve
+    =goal>
+        isa		goal
+        state		review-retrieve-loss
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+    ?retrieval>
+        state		error
+==>
+    +imaginal>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+        result		loss
+    -imaginal>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-win
+    =goal>
+        isa		goal
+        state		gameover-win
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state	free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		review-retrieve-win
+)
+
+(p gameover-history-win-retrieved
+    =goal>
+        isa		goal
+        state		review-retrieve-win
+        action		=action
+    =retrieval>
+        isa		history
+==>
+    =retrieval>
+        action		=action
+        result		win
+    -retrieval>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-history-win-no-retrieve
+    =goal>
+        isa		goal
+        state		review-retrieve-win
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+    ?retrieval>
+        state		error
+==>
+    +imaginal>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+        result		win
+    -imaginal>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(spp default-clear :u 1000)
+
+(goal-focus start-goal)

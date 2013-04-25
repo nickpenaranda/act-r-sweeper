@@ -1,0 +1,400 @@
+(set-task "actr.tasks.minesweeper.Minesweeper")
+
+(sgp 
+    :v nil :visual-num-finsts 63 :visual-finst-span 1000
+)
+
+(start-hand-at-mouse)
+
+(add-dm
+    (start-goal isa goal state start first-move t)
+)
+
+; entry point
+(p start-game
+    =goal>
+        isa		goal
+        state		start
+==>
+    =goal>
+        state		find-new
+)
+
+(p find-start-location
+    =goal>
+        isa 		goal
+        state 		find-new
+    ?visual>
+        state 		free
+==>
+    +visual-location>
+        isa		oval
+        :attended 	nil
+    =goal>
+        state 		finding-location
+)
+
+(p location-found
+    =goal>
+        isa 		goal
+        state		finding-location
+    =visual-location>
+        isa		visual-location
+    ?visual>
+        state		free
+    ?manual>
+        state		free
+==>
+    =visual-location>
+    +visual>
+        isa		move-attention
+        screen-pos	=visual-location
+    +manual>
+        isa		move-cursor
+        loc		=visual-location
+    =goal>
+        state		move-mouse
+)
+
+(p move-mouse-to-position
+    =goal>
+        isa		goal
+        state		move-mouse
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		s
+    =goal>
+        state		wait-for-scan
+)
+
+(p waiting-for-scan
+    =goal>
+        isa		goal
+        state		wait-for-scan
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		location-scanned
+)
+
+; if first move, always clear
+(p default-clear
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	t
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c
+    =goal>
+        state		wait-for-action
+        first-move	f
+        action		c
+)
+
+; not first move, not unknown
+(p uninterested
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	f
+        - e		u
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		find-new
+)
+
+; not first move, unknown, attempt to retrieve history
+(p retrieve-history
+    =goal>
+        isa		goal
+        state		location-scanned
+        first-move	f
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        e		u
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state		free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		attempt-history
+)
+
+; couldn't find this configuration, clear it and hope for the best
+(p retrieve-history-failed
+    =goal>
+        isa		goal
+        state		attempt-history
+    ?retrieval>
+        state		error
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c
+    =goal>
+        state		wait-for-action
+        action		c
+)
+
+; found configuration, was ok last time we did the same move...
+(p retrieve-history-success-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		=action
+        - result	loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		=action
+    =goal>
+        state		wait-for-action
+        action		=action
+)
+
+; found configuration, was NOT ok last time we did the same move...
+(p retrieve-history-success-clear-not-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		c
+        result		loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		f ;flag
+    =goal>
+        state		wait-for-action
+        action		f
+)
+
+(p retrieve-history-success-flag-not-ok
+    =goal>
+        isa		goal
+        state		attempt-history
+    =retrieval>
+        isa		history
+        action		f
+        result		loss
+    ?manual>
+        state		free
+==>
+    +manual>
+        isa		press-key
+        key		c ;clear
+    =goal>
+        state		wait-for-action
+        action		c
+)
+
+; this will only ever fire on non-game-ending moves
+(p waiting-for-action
+    =goal>
+        isa		goal
+        state		wait-for-action
+    ?manual>
+        state		free
+==>
+    =goal>
+        state		find-new
+)
+
+; gameover conditions
+(p gameover-loss
+    =goal>
+        isa		goal
+        state		gameover-loss
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state	free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		review-retrieve-loss
+)
+
+(p gameover-history-loss-retrieved
+    =goal>
+        isa		goal
+        state		review-retrieve-loss
+        action		=action
+    =retrieval>
+        isa		history
+==>
+    =retrieval>
+        action		=action
+        result		loss
+    -retrieval>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-history-loss-no-retrieve
+    =goal>
+        isa		goal
+        state		review-retrieve-loss
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+    ?retrieval>
+        state		error
+==>
+    +imaginal>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+        result		loss
+    -imaginal>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-win
+    =goal>
+        isa		goal
+        state		gameover-win
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    ?manual>
+        state	free
+==>
+    +retrieval>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+    =goal>
+        state		review-retrieve-win
+)
+
+(p gameover-history-win-retrieved
+    =goal>
+        isa		goal
+        state		review-retrieve-win
+        action		=action
+    =retrieval>
+        isa		history
+==>
+    =retrieval>
+        action		=action
+        result		win
+    -retrieval>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(p gameover-history-win-no-retrieve
+    =goal>
+        isa		goal
+        state		review-retrieve-win
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+    ?retrieval>
+        state		error
+==>
+    +imaginal>
+        isa		history
+        a		=a
+        b		=b
+        c		=c
+        d		=d
+        f		=f
+        g		=g
+        h		=h
+        i		=i
+        action		=action
+        result		win
+    -imaginal>
+    =goal>
+        state		find-new
+        first-move	t
+)
+
+(spp default-clear :u 1000)
+
+(goal-focus start-goal)
