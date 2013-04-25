@@ -86,16 +86,9 @@ public class Minesweeper extends actr.task.Task {
 		numMarks = 0;
 		processDisplay();
 	}
-	
-	@Override
-	public void finish ()
-	{
-		System.out.println("--- finish called ---");
-	}
-	
+		
 	@Override
 	public void typeKey(char c) {
-		//System.out.println("Pressed: " + c);
 		int x = (int)(this.getMouseX() / BUTTON_W);
 		int y = (int)(this.getMouseY() / BUTTON_H);
 		
@@ -149,7 +142,8 @@ public class Minesweeper extends actr.task.Task {
 		} else if(win) { // All mines have been marked!
 			int numChunks = this.getModel().getDeclarative().size();
 			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-win"));
-			System.out.printf("Game #%05d *** YOU WIN!!! *** (%d chunks in DM)\n",++gameCount,numChunks);
+			String s = String.format("Game #%05d *** YOU WIN!!! *** (%d chunks in DM)\n",++gameCount,numChunks);
+			this.getModel().output(s);
 			this.start();
 		}
 	} 
@@ -192,7 +186,8 @@ public class Minesweeper extends actr.task.Task {
 			}
 		}
 		int numChunks = this.getModel().getDeclarative().size();
-		System.out.printf("Game #%05d *** YOU LOSE: %d correct, %d incorrect, %d unmarked *** (%d chunks in DM)\n",++gameCount,numCorrectlyMarked,numIncorrectlyMarked,numUnmarkedMine,numChunks);
+		String s = String.format("Game #%05d *** YOU LOSE: %d correct, %d incorrect, %d unmarked *** (%d chunks in DM)\n",++gameCount,numCorrectlyMarked,numIncorrectlyMarked,numUnmarkedMine,numChunks);
+		this.getModel().output(s);
 	}
 	
 	private void checkTile(int x,int y) {
@@ -244,13 +239,7 @@ public class Minesweeper extends actr.task.Task {
 			this.tflags = 0;
 			this.numAdjacent = 0;
 		}
-		
-//		@Override
-//		public void doClick() {
-//			System.out.printf("Clicked %d,%d\n", tx,ty);
-//			clickTile(tx,ty);
-//		}
-		
+				
 		public int getTX() { return(tx); }
 		public int getTY() { return(ty); }
 		public int getAdjacent() { return(numAdjacent); }
