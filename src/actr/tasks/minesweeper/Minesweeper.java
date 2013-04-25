@@ -145,6 +145,7 @@ public class Minesweeper extends actr.task.Task {
 		if(numMarks == NUM_MINES && !win) {
 			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-loss"));
 			printLoseStats();
+			this.start();
 		} else if(win) { // All mines have been marked!
 			int numChunks = this.getModel().getDeclarative().size();
 			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-win"));
