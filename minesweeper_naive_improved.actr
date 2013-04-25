@@ -1,7 +1,7 @@
 (set-task "actr.tasks.minesweeper.Minesweeper")
 
 (sgp 
-    :v nil :visual-num-finsts 63 :visual-finst-span 1000
+    :v nil
 )
 
 (start-hand-at-mouse)

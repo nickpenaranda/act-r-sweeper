@@ -91,8 +91,8 @@ public class Minesweeper extends actr.task.Task {
 	public void finish ()
 	{
 		System.out.println("--- finish called ---");
-		processDisplay();
 	}
+	
 	@Override
 	public void typeKey(char c) {
 		//System.out.println("Pressed: " + c);
@@ -110,6 +110,8 @@ public class Minesweeper extends actr.task.Task {
 			markTile(x,y);
 			break;
 		}
+		this.getModel().getVision().clearVisual();
+		processDisplay();
 	}
 
 	private void doScan(int x, int y) {
@@ -126,35 +128,30 @@ public class Minesweeper extends actr.task.Task {
 	}
 
 	private void markTile(int x, int y) {
-		if(field[x][y].hasState(Tile.MARKED)) {
-			field[x][y].clearFlag(Tile.MARKED);
-			numMarks--;
-		} else if(numMarks < NUM_MINES) {
-			field[x][y].setFlag(Tile.MARKED);
-			field[x][y].setText(Tile.CHAR_FLAG);
-			field[x][y].setBackground(Color.ORANGE);
-			numMarks++;
-			boolean win = true;
-			for(int ix=0;ix<FIELD_W;ix++) {
-				for(int iy=0;iy<FIELD_H;iy++) {
-					if(field[ix][iy].hasState(Tile.HASMINE) && !field[ix][iy].hasState(Tile.MARKED)) {
-						win = false;
-						break;
-					}
+		field[x][y].setFlag(Tile.MARKED);
+		field[x][y].setText(Tile.CHAR_FLAG);
+		field[x][y].setBackground(Color.ORANGE);
+		numMarks++;
+		boolean win = true;
+		for(int ix=0;ix<FIELD_W;ix++) {
+			for(int iy=0;iy<FIELD_H;iy++) {
+				if(field[ix][iy].hasState(Tile.HASMINE) && !field[ix][iy].hasState(Tile.MARKED)) {
+					win = false;
+					break;
 				}
-				if(!win) break;
 			}
-			if(numMarks == NUM_MINES && !win) {
-				this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-loss"));
-				printLoseStats();
-			} else if(win) { // All mines have been marked!
-				int numChunks = this.getModel().getDeclarative().size();
-				this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-win"));
-				System.out.printf("Game #%05d *** YOU WIN!!! *** (%d chunks in DM)\n",++gameCount,numChunks);
-				this.start();
-			}
-		} 
-	}
+			if(!win) break;
+		}
+		if(numMarks == NUM_MINES && !win) {
+			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-loss"));
+			printLoseStats();
+		} else if(win) { // All mines have been marked!
+			int numChunks = this.getModel().getDeclarative().size();
+			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-win"));
+			System.out.printf("Game #%05d *** YOU WIN!!! *** (%d chunks in DM)\n",++gameCount,numChunks);
+			this.start();
+		}
+	} 
 
 	private void clearTraversed() {
 		for(int x=0;x<FIELD_W;x++) {
@@ -207,18 +204,23 @@ public class Minesweeper extends actr.task.Task {
 		if(numAdj > 0) {
 			field[x][y].setText("" + numAdj);
 			field[x][y].setBackground(Color.YELLOW);
+			field[x][y].setFlag(Tile.VISIBLE);
+			return;
 		}
 		else {
 			field[x][y].setText(Tile.CHAR_CLEAR);
 			field[x][y].setBackground(Color.GREEN);
+			field[x][y].setFlag(Tile.VISIBLE);
 		}
 		
-		field[x][y].setFlag(Tile.VISIBLE);
-		
+		checkTile(x-1,y-1);
 		checkTile(x-1,y);
+		checkTile(x-1,y+1);
 		checkTile(x,y-1);
 		checkTile(x,y+1);
+		checkTile(x+1,y-1);
 		checkTile(x+1,y);
+		checkTile(x+1,y+1);
 	}
 	
 	private class Tile extends TaskButton {
