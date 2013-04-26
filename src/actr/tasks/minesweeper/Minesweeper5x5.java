@@ -7,13 +7,18 @@ import java.util.Random;
 import actr.model.Symbol;
 import actr.task.*;
 
-public class Minesweeper extends actr.task.Task {
+public class Minesweeper5x5 extends actr.task.Task {
 	private static final int FIELD_W = 8;
 	private static final int FIELD_H = 8;
 	private static final int BUTTON_W = 48;
 	private static final int BUTTON_H = 48;
 	private static final int NUM_MINES = 4;
-	private static final String[] slots = {"a","b","c","d","e","f","g","h","i"};
+	private static final String[] slots = {
+		"aa","ab","ac","ad","ae",
+		"ba","bb","bc","bd","be",
+		"ca","cb","cc","cd","ce",
+		"da","db","dc","dd","de",
+		"ea","eb","ec","ed","ee"};
 
 	private Tile[][] field;
 	private boolean[][] traversed;
@@ -22,7 +27,7 @@ public class Minesweeper extends actr.task.Task {
 	private int numMarks = 0;
 	private int gameCount = 0;
 	
-	public Minesweeper() {
+	public Minesweeper5x5() {
 		super();
 
 		rng = new Random(new Date().getTime());
@@ -109,8 +114,8 @@ public class Minesweeper extends actr.task.Task {
 
 	private void doScan(int x, int y) {
 		int i = 0;
-		for(int iy=-1;iy<=1;iy++) {
-			for(int ix=-1;ix<=1;ix++) {
+		for(int iy=-2;iy<=2;iy++) {
+			for(int ix=-2;ix<=2;ix++) {
 				if(!inBounds(x+ix, y+iy))
 					this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get(slots[i]), Symbol.get("x"));
 				else 
@@ -130,6 +135,7 @@ public class Minesweeper extends actr.task.Task {
 			this.getModel().getBuffers().setSlot(Symbol.goal, Symbol.get("state"), Symbol.get("gameover-loss"));
 			printLoseStats();
 			this.start();
+			return;
 		}
 		
 		boolean win = true;
