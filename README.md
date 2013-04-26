@@ -6,7 +6,9 @@ An ACT-R model that can learn to play minesweeper.
 Instructions
 ------------
 
-1. Run act-r-sweeper.jar:  java -jar act-r-sweeper
+Prerequisite: You will need a JRE installed, Java 6 or better.
+
+1. Run act-r-sweeper.jar: java -jar act-r-sweeper -OR- double-click (in most cases)
 
 2. Load the naive minesweeper model: File > Open > "minesweeper_naive_improved.actr"
 
