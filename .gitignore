@@ -1,4 +1,5 @@
 *.jar
+*.zip
 bin/
 video/
 minesweeper_trained_4.actr
